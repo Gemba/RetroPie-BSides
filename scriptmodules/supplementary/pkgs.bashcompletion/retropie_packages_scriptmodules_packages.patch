@@ -1,0 +1,60 @@
+diff --git a/scriptmodules/packages.sh b/scriptmodules/packages.sh
+index 9aa54ff1..0b9e457c 100644
+--- a/scriptmodules/packages.sh
++++ b/scriptmodules/packages.sh
+@@ -76,6 +76,7 @@ function rp_moduleVars() {
+         local md_help="${__mod_info[$id/help]}"
+         local md_type="${__mod_info[$id/type]}"
+         local md_flags="${__mod_info[$id/flags]}"
++        local md_section="${__mod_info[$id/section]}"
+         local md_path="${__mod_info[$id/path]}"
+
+         local md_licence="${__mod_info[$id/licence]}"
+@@ -235,6 +236,47 @@ function rp_callModule() {
+             printMsgs "console" "$md_desc\n\n$md_help"
+             return 0;
+             ;;
++        # echo module info to console
++        info)
++            printMsgs "console" "Description : $md_desc"
++            printMsgs "console" "Type        : $md_type"
++            printMsgs "console" "Section     : $md_section"
++            printMsgs "console" "Flags       : $md_flags"
++            if [[ -e $md_inst ]]; then
++                rp_loadPackageInfo "$md_id"
++                local pkg_origin="${__mod_info[$md_id/pkg_origin]}"
++                local pkg_date="${__mod_info[$md_id/pkg_date]}"
++                local pkg_repo_commit="${__mod_info[$md_id/pkg_repo_commit]}"
++                local pkg_repo_url="${__mod_info[$md_id/pkg_repo_url]}"
++                local pkg_repo_branch="${__mod_info[$md_id/pkg_repo_branch]}"
++                local pkg_repo_date="${__mod_info[$md_id/pkg_repo_date]}"
++                local bin_url="$(rp_getBinaryUrl $md_id)"
++                local bin_date="$(rp_getFileDate $bin_url)"
++                printMsgs "console" "Install dir : $md_inst"
++                # seldomly updated modules may contain localized date string
++                printMsgs "console" "Install date: $([[ -n "$pkg_date" ]] && (date -d $pkg_date 2>/dev/null || echo $pkg_date))"
++                printMsgs "console" "Origin      : $pkg_origin"
++                if [[ -n "$bin_date" ]] ; then
++                    printMsgs "console" "Binary URL  : $bin_url"
++                    printMsgs "console" "Binary date : $([[ -n "$bin_date" ]] && date -d $bin_date)"
++                fi
++                if [[ -n "$pkg_repo_url" ]] ; then
++                    printMsgs "console" "Source repo : $pkg_repo_url"
++                    printMsgs "console" "|-- date    : $([[ -n "$pkg_repo_date" ]] && date -d $pkg_repo_date)"
++                    printMsgs "console" "|-- branch  : $pkg_repo_branch"
++                    printMsgs "console" "\\-- commit  : ${pkg_repo_commit:0:8}"
++                fi
++                rp_hasNewerModule "$md_id" "$pkg_origin"
++                [[ "$?" -eq 0 ]] && local pkg_update="[+] Yes"
++                [[ "$?" -eq 1 ]] && local pkg_update="[=] No, already on latest from $pkg_origin"
++                [[ "$?" -eq 2 ]] && local pkg_update="[?] Unknown"
++                [[ "$?" -eq 3 ]] && local pkg_update="[!] Query error"
++                printMsgs "console" "Has update  : ${pkg_update}"
++            else
++                printMsgs "console" "Install dir : [*] Not installed"
++            fi
++            return 0;
++            ;;
+     esac
+
+     # create function name

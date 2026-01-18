@@ -1,0 +1,42 @@
+#! /usr/bin/env bash
+
+module_actions()
+{
+    local md_id="${COMP_WORDS[1]}"
+    local md_fn="${md_id}.sh"
+    local actions=$(find ~/RetroPie-Setup -type f \
+        -name "${md_fn}" \
+        -exec sed -nE s/"^function\s+([^_].+)_${md_id}\(.+$"/"\1"/p {} \;
+    )
+    local bin_inst=""
+    # install_bin may not always be supported by module
+    # adding it nevertheless for convenience
+    [[ $actions == *"install"* ]] && [[ $actions != *"install_bin"* ]] \
+        && bin_inst=" install_bin"
+    echo "$actions clean help info remove $bin_inst"
+}
+
+collect_modules()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    case $COMP_CWORD in
+        1)
+            if [[ -z $_cache_sm ]]; then
+                _cache_sm="$(cat /opt/retropie/configs/all/rp-bashcompletion/scriptmodules.lst)"
+            fi
+
+            local modules=($(compgen -W "${_cache_sm}" -- "$cur"))
+
+            if [ "${#modules[@]}" == "1" ]; then
+                COMPREPLY=("${modules[0]}")
+            else
+                COMPREPLY=("${modules[@]}")
+            fi
+            ;;
+        2)
+            COMPREPLY+=($(compgen -W "$(module_actions)" -- "$cur"))
+            ;;
+    esac
+}
+complete -F collect_modules retropie_packages.sh
+
