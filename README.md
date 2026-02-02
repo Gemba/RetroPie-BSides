@@ -78,6 +78,11 @@ Installation: [Mini How-To](docs/Edna_Breakout.md) • Scriptmodule: [Source](sc
 ![Screenshot of 'lr-applewin'](docs/img/Libretro%20AppleWin.png)  
 Installation: [Mini How-To](docs/Libretro_Applewin.md) • Scriptmodule: [Source](scriptmodules/libretrocores/lr-applewin.sh)
 
+#### Libretro Core of b2 emulator (lr-b2)
+
+![Image for 'Libretro BBC Micro'](docs/img/Libretro%20BBC%20Micro.png)  
+Installation: [Mini How-To](docs/Libretro_bbcmicro.md) • Scriptmodule: [Source](scriptmodules/libretrocores/lr-b2.sh)
+
 ### Supplementary Tools
 
 #### Enhanced Bash Welcome on Login (rb_bashwelcome)

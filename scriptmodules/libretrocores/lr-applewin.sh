@@ -28,6 +28,10 @@
 # - You can cycle through the video modes with right shoulder button
 #   (RETRO_DEVICE_ID_JOYPAD_R). You can toggle scanlines with left shoulder
 #   button (RETRO_DEVICE_ID_JOYPAD_L).
+#
+# **References**
+#
+# - Project site: https://github.com/audetto/AppleWin
 
 rp_module_id="lr-applewin"
 rp_module_desc="Apple2e emulator: AppleWin (current) libretro core for RetroArch"
