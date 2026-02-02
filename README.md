@@ -78,14 +78,6 @@ Installation: [Mini How-To](docs/Edna_Breakout.md) • Scriptmodule: [Source](sc
 ![Screenshot of 'lr-applewin'](docs/img/Libretro%20AppleWin.png)  
 Installation: [Mini How-To](docs/Libretro_Applewin.md) • Scriptmodule: [Source](scriptmodules/libretrocores/lr-applewin.sh)
 
-#### Intellivision Emulator (rb_jzintv)
-
-This is a drop-in replacement, it will de-install the official RetroPie scriptmodule.
-
-![Screenshot of 'jzIntv'](docs/img/jzIntv.png)  
-
-Installation: [Mini How-To](docs/Jzintv.md) • Scriptmodule: [Source](scriptmodules/emulators/rb_jzintv.sh)
-
 ### Supplementary Tools
 
 #### Enhanced Bash Welcome on Login (rb_bashwelcome)
