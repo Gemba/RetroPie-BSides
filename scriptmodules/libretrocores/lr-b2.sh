@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-# RetroPie scriptmodule to install the libretro core build of
-# b2, BBC Micro emulator
+# RetroPie scriptmodule to install the libretro core of b2,
+# the BBC Micro emulator
 
 # Copyright 2026 Gemba @ Github
 #
