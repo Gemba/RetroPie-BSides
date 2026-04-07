@@ -3,7 +3,7 @@
 
 Apple2e emulator: AppleWin (current) libretro core for RetroArch  
 
-![Screenshot of 'Libretro Applewin'](img/Libretro%20Applewin.png)
+![Screenshot of 'Libretro Applewin'](img/Libretro%20AppleWin.png)
 
 **Additional Notes**
 
