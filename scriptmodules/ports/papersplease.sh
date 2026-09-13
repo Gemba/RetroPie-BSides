@@ -37,7 +37,7 @@
 #    `~/RetroPie-Setup/ext/bsides/scriptmodule/ports/papersplease/` on your RPi. _-OR-_
 # 4. If you have the GOG installer: Copy the binary `PapersPlease` and all
 #    sibling files and the subdirectories (`asset/`, `loc/`) to your RPi
-#    at `~/RetroPie/roms/ports/papers-please/`. Create the folder 
+#    at `~/RetroPie/roms/ports/papers-please/`. Create the folder
 #    `~/RetroPie/roms/ports/papers-please/` first.
 # 5. That's it. Now execute this scriptmodule.
 # 6. If Box86 claims it cannot install due to libsdl2, then unhold the mark with
@@ -64,11 +64,11 @@ rp_module_help+=" comments in this scriptmodule for details."
 _papersplease_romdir="$romdir/ports/papers-please"
 
 function depends_papersplease() {
-	if isPlatform "64bit" ; then 
-	    dpkg --add-architecture armhf
-		sudo apt-get update
-	    apt-get install libasound2-plugins:armhf -y
-	fi
+    if isPlatform "64bit"; then
+        dpkg --add-architecture armhf
+        sudo apt-get update
+        apt-get install libasound2-plugins:armhf -y
+    fi
     getDepends rsync
     gitPullOrClone "$home/pi-apps" https://github.com/Botspot/pi-apps
     chown -R $user: "$home/pi-apps"
@@ -76,7 +76,7 @@ function depends_papersplease() {
 }
 
 function install_papersplease() {
-    if [[ "$(find $md_data/*.deb 2>/dev/null)" ]] ; then
+    if [[ "$(find $md_data/*.deb 2>/dev/null)" ]]; then
         # unpack *.deb
         local tmpdir
         tmpdir=$(mktemp -d)
@@ -84,12 +84,12 @@ function install_papersplease() {
         mkUserDir "$_papersplease_romdir"
         rsync -aq --delete --chown="$user":"$user" "$tmpdir/opt/papers-please/" "$_papersplease_romdir"
     else
-        for f in PapersPlease lime.ndll assets/ loc/ ; do
-            if [[ ! -e "$_papersplease_romdir/$f" ]] ; then
+        for f in PapersPlease lime.ndll assets/ loc/; do
+            if [[ ! -e "$_papersplease_romdir/$f" ]]; then
                 local err="FATAL: Mandatory game file not found: "
                 err+="$_papersplease_romdir/$f. Fix your setup. Quitting."
                 printMsgs "console" "$err"
-                exit 1;
+                exit 1
             fi
         done
     fi
@@ -100,15 +100,15 @@ function configure_papersplease() {
 
     [[ $md_mode != "install" ]] && return
 
-	mkdir -p "$home/.local/share/3909/PapersPlease" && chown -R $user: "$home/.local/share/3909"
+    mkdir -p "$home/.local/share/3909/PapersPlease" && chown -R $user: "$home/.local/share/3909"
     moveConfigDir "$home/.local/share/3909/PapersPlease" "$configdir/ports/$md_id"
 
     # settings which contain fullscreen off, as commodity to the workaround (see
     # comments in launcher below)
     local settings
     settings="$configdir/ports/$md_id/settings.sav"
-    if [[ ! -f "$settings" ]] ; then
-        cat << _EOF_ | tr -d "[:space:]" | tee "$settings" >/dev/null
+    if [[ ! -f "$settings" ]]; then
+        cat <<_EOF_ | tr -d "[:space:]" | tee "$settings" >/dev/null
             3285DC0CC1903D09893CCDCC4B6B7B06FE9D50AA2FA7093B6662A1F46BA494409A9
             F9BE4995F2C9034F58F746E4D536AE81B503AC8D842B8C023F7A41A28699F0C29A3
             5E8FD94FF73F25188DC61F264C3F9083B50CAFAC2F9292ED78DE2B00AEA09A629EE
@@ -124,7 +124,7 @@ _EOF_
         chown -R $user: "$settings"
     fi
 
-    cat >"$md_inst/rplauncher.sh" << _EOF_
+    cat >"$md_inst/rplauncher.sh" <<_EOF_
 #! /usr/bin/env bash
 xset -dpms s off s noblank
 

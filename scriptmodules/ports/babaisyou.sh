@@ -64,7 +64,6 @@
 # Launch Baba again from EmulationStation and remember to divert into the
 # _Runcommand Menu_ of RetroPie to adjust the resolution. That's all folks!
 
-
 rp_module_id="babaisyou"
 rp_module_desc="Module for the puzzle game 'Baba Is You' by Hempuli"
 rp_module_licence="PROP"
@@ -85,9 +84,9 @@ function depends_babaisyou() {
 
 function install_babaisyou() {
     mkdir -p "$_babaisyou_romdir"
-    if [[ -f "$_babaisyou_romdir/../BIY_linux.tar.gz" ]] ; then
-        for f in Assets.dat bin32 bin64 Data gamecontrollerdb.txt prev_dims.p ; do
-          rm -rf "${_babaisyou_romdir:?}/$f"
+    if [[ -f "$_babaisyou_romdir/../BIY_linux.tar.gz" ]]; then
+        for f in Assets.dat bin32 bin64 Data gamecontrollerdb.txt prev_dims.p; do
+            rm -rf "${_babaisyou_romdir:?}/$f"
         done
         pushd "$_babaisyou_romdir/.."
         tar xzf BIY_linux.tar.gz
@@ -95,8 +94,8 @@ function install_babaisyou() {
         chown -R $user: "$_babaisyou_romdir"
         rm -f "$_babaisyou_romdir/../BIY_linux.tar.gz"
     else
-        for f in Assets.dat bin64 Data gamecontrollerdb.txt ; do
-            if [[ -e "$_babaisyou_romdir/$f" ]] ; then
+        for f in Assets.dat bin64 Data gamecontrollerdb.txt; do
+            if [[ -e "$_babaisyou_romdir/$f" ]]; then
                 local info="\nNo tar archive found, existing installation "
                 info+="kept unchanged. No action performed.\n"
                 printMsgs "console" "$info"
@@ -108,15 +107,15 @@ function install_babaisyou() {
         err+="$_babaisyou_romdir/../BIY_linux.tar.gz. See notes in this scriptmodule for "
         err+="expected installation archive. Quitting.\n"
         printMsgs "console" "$err"
-        exit 1;
+        exit 1
     fi
-    for f in Assets.dat bin64 Data gamecontrollerdb.txt ; do
-        if [[ ! -e "$_babaisyou_romdir/$f" ]] ; then
+    for f in Assets.dat bin64 Data gamecontrollerdb.txt; do
+        if [[ ! -e "$_babaisyou_romdir/$f" ]]; then
             local err="\nFATAL: Mandatory game file not found: "
             err+="$_babaisyou_romdir/$f. See notes in this scriptmodule for "
             err+="expected installation files. Quitting.\n"
             printMsgs "console" "$err"
-            exit 1;
+            exit 1
         fi
     done
     cp -f "$md_data/patch_is_win.py" "$md_inst"
@@ -144,7 +143,7 @@ function configure_babaisyou() {
         baba_bin="bin64/Chowdren"
     fi
 
-    cat >"$md_inst/rplauncher.sh" << _EOF_
+    cat >"$md_inst/rplauncher.sh" <<_EOF_
 #! /usr/bin/env bash
 xset -dpms s off s noblank
 

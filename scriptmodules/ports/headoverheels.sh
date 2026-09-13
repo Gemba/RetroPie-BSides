@@ -18,7 +18,7 @@
 # ---
 # **Additional Notes**
 #
-# - In its current state, the game only runs smoothly on a Raspberry Pi 4 
+# - In its current state, the game only runs smoothly on a Raspberry Pi 4
 #   and onwards or on x86.
 # - Preferences are in `~/.headoverheels/preferences.xml`.
 # - Savegames are held in `~/.headoverheels/savegame/*`.
@@ -68,7 +68,7 @@ function build_hoh() {
     ./configure --with-allegro5 --prefix="$_hoh_romdir" #--enable-debug=yes
 
     make clean
-    make 
+    make
     md_ret_require="$md_build/source/$(basename "$_hoh_executable")"
 }
 
@@ -92,8 +92,8 @@ function configure_hoh() {
     mkUserDir "$pref_dir"
     moveConfigDir "$pref_dir" "$md_conf_root/$ports_cfg_dir"
 
-    if [[ ! -e "$pref_file" ]] ; then
-        cat >"$pref_file" << _EOF_
+    if [[ ! -e "$pref_file" ]]; then
+        cat >"$pref_file" <<_EOF_
 <preferences>
     <language>en_US</language>
     <keyboard>
@@ -125,7 +125,7 @@ _EOF_
         chown "$user": "$pref_file"
     fi
 
-    cat >"$launcher" << _EOF_
+    cat >"$launcher" <<_EOF_
 #! /usr/bin/env bash
 xset -dpms s off s noblank
 cd "$_hoh_romdir"

@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-# RetroPie scriptmodule to install the libretro core build of 
+# RetroPie scriptmodule to install the libretro core build of
 # AppleWin, the Apple2e emulator
 
 # Copyright 2025 Gemba @ Github
@@ -40,7 +40,6 @@ rp_module_licence="GPL2 https://raw.githubusercontent.com/audetto/AppleWin/maste
 rp_module_repo="git https://github.com/audetto/AppleWin.git master"
 rp_module_section="opt"
 rp_module_flags=""
-
 
 function depends_lr-applewin() {
     local depends=(
@@ -111,7 +110,7 @@ function install_lr-applewin() {
 function configure_lr-applewin() {
     mkRomDir "apple2"
 
-    if [[ "$md_mode" == "install" ]] ; then
+    if [[ "$md_mode" == "install" ]]; then
         defaultRAConfig "apple2" "input_auto_game_focus" "0" # 0: off, 1: on, 2: detect
         defaultRAConfig "apple2" "load_dummy_on_core_shutdown" "false"
         # Disable at all if defined in parent Retroarch configs or

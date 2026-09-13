@@ -29,7 +29,8 @@
 #
 # **Additional Notes**
 #
-# ??? Wie Änderungen vom user hier halten (dtbc files)
+# - You will have to edit at least /boot/config.txt to load the device tree
+#   driver. See https://github.com/gemba/arcade-dt#configuration.
 
 rp_module_id="arcadedt"
 rp_module_desc="Lowest latency Joystick/Gamepad driver for GPIO connected devices."
@@ -38,87 +39,50 @@ rp_module_section="opt"
 rp_module_flags="!all rpi1 rpi2 rpi3 rpi4 rpi5"
 rp_module_help="Requires manual configuration before fully usable, see: https://github.com/gemba/arcade-dt"
 
-
 function depends_arcadedt() {
     local deb_pkgs=(
-        cpp 
-        device-tree-compiler 
+        cpp
+        device-tree-compiler
         evtest
-        gpiod 
-        make 
+        gpiod
+        make
     )
-    if [[ "$__os_debian_ver" -gt 10 ]] ; then
-        deb_pkgs+=(innoextract)
+    local kernel=$(uname -r | cut -f 2- -d'-')
+    if LANG=C apt-cache policy "linux-headers-$kernel" | grep -q Version; then
+        deb_pkgs+=("linux-headers-$kernel")
+    else
+        # RetroPie Buster
+        deb_pkgs+=(linux-headers-rpi)
     fi
     getDepends ${deb_pkgs[*]}
 }
 
 function sources_arcadedt() {
     gitPullOrClone
+    cd arcade-dt
+    git submodule init
+    git submodule update
 }
 
 function build_arcadedt() {
-    download https://raw.githubusercontent.com/raspberrypi/utils/refs/heads/master/ovmerge/ovmerge && chmod a+x ovmerge
+    make
 }
 
 function install_arcadedt() {
-
-    downloadAndExtract 'http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%202.9.3/lwjgl-2.9.3.zip' "$md_build"
-    mkUserDir "$_edna_romdir"/lib
-    cp -p "$md_build/lwjgl-2.9.3/jar/lwjgl.jar" "$_edna_romdir"/lib
-    chown "$user": "$_edna_romdir"/lib/*.jar
-    chmod a+x "$_edna_romdir"/lib/*.jar
+    make install
 }
 
 function configure_arcadedt() {
-    addPort "$md_id" "edna" "Edna & Harvey: The Breakout" "XINIT:$md_inst/EdnaBreakout.sh"
-
     [[ $md_mode != "install" ]] && return
+    local msg=(
+        "You must configure at least /boot/config.txt before Arcade DT is fully usable!"
+        "See: https://github.com/gemba/arcade-dt#configuration\n"
+        "If you have different GPIO wiring than the default, rerun this scriptmodule in steps:"
+        "1. Run: retropie_packages.sh arcadedt sources"
+        "2. Make changes according to your setup, see URL above."
+        "3. Run: retropie_packages.sh arcadedt build"
+        "4. Run: retropie_packages.sh arcadedt install"
+    )
 
-    local pulse_client_confd="/etc/pulse/client.conf.d"
-    # set Pulseaudio autospawn
-    if [[ -f "$pulse_client_confd/00-disable-autospawn.conf" ]] ; then
-        mv "$pulse_client_confd/00-disable-autospawn.conf" "$pulse_client_confd/00-disable-autospawn.conf.pre_edna"
-    fi
-    echo "# Allow per user autospawning of PA (triggered by openal) for Edna" > "$pulse_client_confd/00-set-autospawn.conf"
-    echo "autospawn=yes" >> "$pulse_client_confd/00-set-autospawn.conf"
-
-    local openal_conf="$home/.config/alsoft.conf"
-
-    if [[ -f "$openal_conf" ]] && [[ ! -f "$openal_conf.pre_edna" ]] ; then
-        mv "$openal_conf" "$openal_conf.pre_edna"
-    fi
-
-    if [[ ! -f "$openal_conf" ]] ; then
-        iniConfig " = " "" "$openal_conf"
-        echo "# for RetroPie: ports/edna" >> "$openal_conf"
-        iniSet "drivers" "pulse"
-        iniSet "rt-prio" "10"
-        iniSet "channels" "stereo"
-        iniSet "stereo-mode" "speakers"
-        echo "[pulse]" >> "$openal_conf"
-        iniSet "spawn-server" "true"
-
-        chown "$user": "$openal_conf"
-    fi
-
-    mkdir -p "$md_inst"
-    mkdir -p "$_edna_romdir"
-
-    cat >"$md_inst/EdnaBreakout.sh" << _EOF_
-#! /usr/bin/env bash
-xset -dpms s off s noblank
-cd "$_edna_romdir"
-# ALSOFT_LOGLEVEL=3 java -jar ... for openal verbose output
-export JAVA_HOME="$_edna_romdir/jdk1.8.0"
-\$JAVA_HOME/bin/java -jar -Xms256M -Xmx768M -Dsun.java2d.opengl=true -Djava.library.path=/usr/lib/jni/ Edna.jar
-unset JAVA_HOME
-killall xinit
-_EOF_
-    chmod +x "$md_inst/EdnaBreakout.sh"
-
-    # adjust game's preferen.ces
-    for k in accelerated bufferStrategy fullscreen isFullscreen; do
-        xmlstarlet ed --inplace -u "//node[@name='edna']/map/entry[@key='$k']/@value" -v 'true' "$_edna_romdir/ednaPreferen.ces"
-    done
+    printMsgs dialog "${msg[*]}"
 }

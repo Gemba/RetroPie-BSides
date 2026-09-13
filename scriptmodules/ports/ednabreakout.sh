@@ -33,18 +33,18 @@
 #       on the site.
 #     - Download the identified JDK and transfer it to your RetroPie.
 #
-# 2. Install the JDK. 
+# 2. Install the JDK.
 #     - Execute on your RetroPie: `mkdir -p
-#       ~/RetroPie/roms/ports/edna && cd ~/RetroPie/roms/ports/edna`. 
+#       ~/RetroPie/roms/ports/edna && cd ~/RetroPie/roms/ports/edna`.
 #     - Then 'un-tar'
 #       the JDK inside this folder, e.g. `tar xzf
-#       /path/to/jdk-8u461-linux-aarch64.tar.gz` (filename may differ). 
-#     - Finally, rename the folder of the expanded tar: `mv jdk1.8.0_* jdk1.8.0` 
+#       /path/to/jdk-8u461-linux-aarch64.tar.gz` (filename may differ).
+#     - Finally, rename the folder of the expanded tar: `mv jdk1.8.0_* jdk1.8.0`
 #     - **Tip**: If you are using RetroPie on Debian 11 or later you may now run
 #       `sudo ~/RetroPie-Setup/retropie_packages.sh edna depends`. It will
 #        install the tool `innoextract` whcih will be used later.
-# 
-# 3. Deploy the game files. 
+#
+# 3. Deploy the game files.
 #     - Get your GOG "Edna and Harvey" setup files (usually a `*.exe` and a
 #       larger `*.bin`) and copy it to your RetroPie or when on RetroPie Buster
 #       (Debian 10) then skip the innoextract step.
@@ -80,13 +80,13 @@ _edna_romdir="$romdir/ports/edna"
 
 function depends_edna() {
     local deb_pkgs=(
-        liblwjgl-java 
-        libopenal-data 
-        libopenal1 
-        pulseaudio 
+        liblwjgl-java
+        libopenal-data
+        libopenal1
+        pulseaudio
         pulseaudio-utils
 		rsync
-        xorg 
+        xorg
     )
     if [[ "$__os_debian_ver" -gt 10 ]] ; then
         deb_pkgs+=(innoextract)
