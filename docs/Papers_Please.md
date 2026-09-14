@@ -1,11 +1,11 @@
 
-## Mini How-To for 'Papers, Please' Scriptmodule
+## Mini How-To for 'Papers, Please!' Scriptmodule
 
 Module for the simulation game 'Papers, Please' by Lucas Pope  
 
-![Screenshot of 'Papers, Please'](img/Papers,%20Please.png)
+![Screenshot of 'Papers, Please!'](img/Papers,%20Please.png)
 
-_Requires Humble (*.deb) or GOG (setup_papers_please*.sh) installer. (any version before v1.4.0 should work)._
+_Requires Humble (\*.deb) or GOG (setup\_papers\_please\*.sh) installer. (any version before v1.4.0 should work)._
 
 **Preparation**
 
