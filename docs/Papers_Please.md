@@ -1,5 +1,5 @@
 
-## How-To for 'Papers, Please' Scriptmodule
+## Mini How-To for 'Papers, Please' Scriptmodule
 
 Module for the simulation game 'Papers, Please' by Lucas Pope  
 

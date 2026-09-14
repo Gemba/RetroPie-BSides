@@ -1,5 +1,5 @@
 
-## How-To for 'Edna & Harvey: The Breakout' Scriptmodule
+## Mini How-To for 'Edna & Harvey: The Breakout' Scriptmodule
 
 Module for the point and click adventure 'Edna and Harvey: The breakout'  
 

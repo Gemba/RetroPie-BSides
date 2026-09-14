@@ -1,5 +1,5 @@
 
-## How-To for 'Bash Welcome' Scriptmodule
+## Mini How-To for 'Bash Welcome' Scriptmodule
 
 Adds extra version info (Raspberry Pi model, RetroPie-Setup, RetroArch, SDL) to the message-of-the-day logon banner.  
 

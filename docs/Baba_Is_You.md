@@ -1,5 +1,5 @@
 
-## How-To for 'Baba Is You' Scriptmodule
+## Mini How-To for 'Baba Is You' Scriptmodule
 
 Module for the puzzle game 'Baba Is You' by Hempuli  
 

@@ -44,7 +44,7 @@ rp_module_desc="BBC Micro emulator: Libretro core of the b2 emulator for RetroAr
 rp_module_help="ROM Extension: .dsd .ssd .zip\n\nCopy your roms to $romdir/bbcmicro"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/zoltanvb/b2-libretro/refs/heads/master/src/COPYING"
 rp_module_repo="git https://github.com/zoltanvb/b2-libretro.git master"
-rp_module_section="exp"
+rp_module_section="opt"
 rp_module_flags=""
 
 function sources_lr-b2() {
