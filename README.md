@@ -56,7 +56,7 @@ Installation: [Mini How-To](docs/Baba_Is_You.md) • Scriptmodule: [Source](scri
 
 #### Donut Dodo
 
-![Screenshot of 'Donut Dodo'](docs/img/Donut%20Dodo%20Logo.png) 
+![Screenshot of 'Donut Dodo'](docs/img/Donut%20Dodo%20Logo.png)  
 Installation: [Mini How-To](docs/Donut_Dodo_64.md) • Scriptmodule: [Source](scriptmodules/ports/donutdodo64.sh)
 
 #### Papers, Please
