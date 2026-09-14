@@ -1,9 +1,9 @@
 
-## How-To for 'Libretro Applewin' Scriptmodule
+## Mini How-To for 'Libretro AppleWin' Scriptmodule
 
 Apple2e emulator: AppleWin (current) libretro core for RetroArch  
 
-![Screenshot of 'Libretro Applewin'](img/Libretro%20AppleWin.png)
+![Screenshot of 'Libretro AppleWin'](img/Libretro%20AppleWin.png)
 
 **Additional Notes**
 

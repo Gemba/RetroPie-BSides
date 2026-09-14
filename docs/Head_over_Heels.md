@@ -1,5 +1,5 @@
 
-## How-To for 'Head over Heels' Scriptmodule
+## Mini How-To for 'Head over Heels' Scriptmodule
 
 Open sourced and enhanced remake of 'Head over Heels'  
 

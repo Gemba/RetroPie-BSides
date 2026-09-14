@@ -1,5 +1,5 @@
 
-## How-To for 'Libretro BBC Micro' Scriptmodule
+## Mini How-To for 'Libretro BBC Micro' Scriptmodule
 
 BBC Micro emulator: Libretro core of the b2 emulator for RetroArch  
 
