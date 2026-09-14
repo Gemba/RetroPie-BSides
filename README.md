@@ -45,8 +45,6 @@ For usage see subsequent sections:
 
 ## What do I find at the BSides?
 
-To avoid name collision some packages from this repo contain the `rb_` prefix but they will replace the RetroPie scriptmodule with the same name. E.g., `rb_jzintv` will replace `jzintv`.
-
 ### Game Ports
 
 The actual games/ROMs are not included for copyright/license reasons. You can find them on the internet and also how to get a license. I have got mine from GOG.com and humblebumble.com.
@@ -58,7 +56,7 @@ Installation: [Mini How-To](docs/Baba_Is_You.md) • Scriptmodule: [Source](scri
 
 #### Donut Dodo
 
-![Screenshot of 'Donut Dodo'](img/Donut%20Dodo%20Logo.png) 
+![Screenshot of 'Donut Dodo'](docs/img/Donut%20Dodo%20Logo.png) 
 Installation: [Mini How-To](docs/Donut_Dodo_64.md) • Scriptmodule: [Source](scriptmodules/ports/donutdodo64.sh)
 
 #### Papers, Please
